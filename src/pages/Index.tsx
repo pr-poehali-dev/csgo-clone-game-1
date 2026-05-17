@@ -363,7 +363,7 @@ function HomePage({ addToCart, added }: { addToCart: (p: (typeof PRODUCTS)[0]) =
             <br />
             <span className="text-[#FF5A00]">НА ВСЁ</span>
           </h2>
-          <p className="text-white/70 mb-6">По промокоду <strong className="text-white">NOVA20</strong> до конца месяца</p>
+          <p className="text-white/70 mb-6">По промокоду <strong className="text-white">SHOP20</strong> до конца месяца</p>
           <button className="bg-white text-[#4F46E5] px-8 py-3 rounded-2xl font-oswald font-bold uppercase tracking-wider hover:bg-white/90 transition-all">
             Получить скидку
           </button>
