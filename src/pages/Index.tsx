@@ -72,33 +72,13 @@ const PRODUCTS = [
 
 const MARQUEE_ITEMS = ["БЕСПЛАТНАЯ ДОСТАВКА ОТ 3000₽", "ВОЗВРАТ 14 ДНЕЙ", "ОРИГИНАЛЬНЫЕ ТОВАРЫ", "ОПЛАТА ЛЮБЫМ СПОСОБОМ", "ПОДДЕРЖКА 24/7"];
 
-type CartItem = { id: number; name: string; price: number; qty: number; image: string };
 type Page = "home" | "contacts";
+type AuthModal = "login" | "register" | null;
 
 export default function Index() {
   const [page, setPage] = useState<Page>("home");
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [added, setAdded] = useState<number | null>(null);
-
-  const totalQty = cart.reduce((s, i) => s + i.qty, 0);
-  const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
-
-  const addToCart = (p: (typeof PRODUCTS)[0]) => {
-    setCart((prev) => {
-      const ex = prev.find((i) => i.id === p.id);
-      if (ex) return prev.map((i) => i.id === p.id ? { ...i, qty: i.qty + 1 } : i);
-      return [...prev, { id: p.id, name: p.name, price: p.price, qty: 1, image: p.image }];
-    });
-    setAdded(p.id);
-    setTimeout(() => setAdded(null), 1200);
-  };
-
-  const changeQty = (id: number, delta: number) => {
-    setCart((prev) =>
-      prev.map((i) => i.id === id ? { ...i, qty: Math.max(0, i.qty + delta) } : i).filter((i) => i.qty > 0)
-    );
-  };
+  const [authModal, setAuthModal] = useState<AuthModal>(null);
+  const [authForm, setAuthForm] = useState({ email: "", password: "", name: "" });
 
   return (
     <div className="min-h-screen bg-[#F8F7F5] font-golos">
@@ -133,16 +113,16 @@ export default function Index() {
               <span>Telegram: @Qwerty_Police</span>
             </button>
             <button
-              onClick={() => setCartOpen(true)}
-              className="relative flex items-center gap-2 bg-[#FF5A00] hover:bg-[#e05200] text-white px-4 py-2 rounded-full font-semibold text-sm transition-all btn-glow"
+              onClick={() => setAuthModal("login")}
+              className="border border-border hover:border-[#FF5A00] hover:text-[#FF5A00] text-foreground px-4 py-2 rounded-full font-semibold text-sm transition-all"
             >
-              <Icon name="ShoppingCart" size={18} />
-              <span className="hidden sm:inline">Корзина</span>
-              {totalQty > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-[#4F46E5] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold animate-pulse-badge">
-                  {totalQty}
-                </span>
-              )}
+              Вход
+            </button>
+            <button
+              onClick={() => setAuthModal("register")}
+              className="bg-[#FF5A00] hover:bg-[#e05200] text-white px-4 py-2 rounded-full font-semibold text-sm transition-all btn-glow"
+            >
+              Регистрация
             </button>
           </div>
         </div>
@@ -160,73 +140,119 @@ export default function Index() {
       </div>
 
       {/* PAGES */}
-      {page === "home" && <HomePage addToCart={addToCart} added={added} />}
+      {page === "home" && <HomePage />}
       {page === "contacts" && <ContactsPage />}
 
-      {/* CART DRAWER */}
-      {cartOpen && (
-        <div className="fixed inset-0 z-50 flex">
-          <div className="flex-1 bg-black/40 backdrop-blur-sm" onClick={() => setCartOpen(false)} />
-          <div className="w-full max-w-md bg-white shadow-2xl flex flex-col animate-slide-right">
-            <div className="flex items-center justify-between p-6 border-b">
-              <h2 className="font-oswald text-2xl font-bold uppercase">Корзина</h2>
-              <button onClick={() => setCartOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">
-                <Icon name="X" size={24} />
+      {/* AUTH MODAL */}
+      {authModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setAuthModal(null)} />
+          <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-md animate-scale-in">
+            {/* Tabs */}
+            <div className="flex border-b">
+              <button
+                onClick={() => { setAuthModal("login"); setAuthForm({ email: "", password: "", name: "" }); }}
+                className={`flex-1 py-4 font-oswald font-bold text-lg uppercase tracking-wider transition-colors rounded-tl-3xl ${authModal === "login" ? "text-[#FF5A00] border-b-2 border-[#FF5A00]" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                Вход
+              </button>
+              <button
+                onClick={() => { setAuthModal("register"); setAuthForm({ email: "", password: "", name: "" }); }}
+                className={`flex-1 py-4 font-oswald font-bold text-lg uppercase tracking-wider transition-colors rounded-tr-3xl ${authModal === "register" ? "text-[#FF5A00] border-b-2 border-[#FF5A00]" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                Регистрация
+              </button>
+              <button
+                onClick={() => setAuthModal(null)}
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Icon name="X" size={20} />
               </button>
             </div>
 
-            {cart.length === 0 ? (
-              <div className="flex-1 flex flex-col items-center justify-center gap-4 text-muted-foreground p-8">
-                <Icon name="ShoppingCart" size={56} />
-                <p className="text-lg font-medium">Корзина пуста</p>
-                <button
-                  onClick={() => setCartOpen(false)}
-                  className="bg-[#FF5A00] hover:bg-[#e05200] text-white px-6 py-3 rounded-full font-semibold transition-all btn-glow"
-                >
-                  Перейти к товарам
-                </button>
-              </div>
-            ) : (
-              <>
-                <div className="flex-1 overflow-y-auto p-6 space-y-4">
-                  {cart.map((item) => (
-                    <div key={item.id} className="flex gap-4 items-center bg-[#F8F7F5] rounded-2xl p-3">
-                      <img src={item.image} alt={item.name} className="w-16 h-16 rounded-xl object-cover" />
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm truncate">{item.name}</p>
-                        <p className="text-[#FF5A00] font-bold">{item.price.toLocaleString("ru")} ₽</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => changeQty(item.id, -1)}
-                          className="w-8 h-8 rounded-full border-2 border-border hover:border-[#FF5A00] flex items-center justify-center font-bold transition-colors"
-                        >
-                          −
-                        </button>
-                        <span className="w-6 text-center font-bold">{item.qty}</span>
-                        <button
-                          onClick={() => changeQty(item.id, 1)}
-                          className="w-8 h-8 rounded-full bg-[#FF5A00] text-white flex items-center justify-center font-bold hover:bg-[#e05200] transition-colors"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="p-6 border-t space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground font-medium">Итого:</span>
-                    <span className="font-oswald text-2xl font-bold">{totalPrice.toLocaleString("ru")} ₽</span>
+            <div className="p-8">
+              {authModal === "login" ? (
+                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5">Email</label>
+                    <input
+                      type="email"
+                      value={authForm.email}
+                      onChange={(e) => setAuthForm({ ...authForm, email: e.target.value })}
+                      placeholder="your@email.ru"
+                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                    />
                   </div>
-                  <button className="w-full bg-[#FF5A00] hover:bg-[#e05200] text-white py-4 rounded-2xl font-oswald font-bold text-lg uppercase tracking-wider transition-all btn-glow flex items-center justify-center gap-2">
-                    <Icon name="CreditCard" size={20} />
-                    Оформить заказ
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5">Пароль</label>
+                    <input
+                      type="password"
+                      value={authForm.password}
+                      onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })}
+                      placeholder="••••••••"
+                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-[#FF5A00] hover:bg-[#e05200] text-white py-4 rounded-2xl font-oswald font-bold text-lg uppercase tracking-wider transition-all btn-glow mt-2"
+                  >
+                    Войти
                   </button>
-                  <p className="text-xs text-center text-muted-foreground">Нажимая кнопку, вы соглашаетесь с условиями</p>
-                </div>
-              </>
-            )}
+                  <p className="text-center text-sm text-muted-foreground">
+                    Нет аккаунта?{" "}
+                    <button onClick={() => setAuthModal("register")} className="text-[#FF5A00] font-semibold hover:underline">
+                      Зарегистрироваться
+                    </button>
+                  </p>
+                </form>
+              ) : (
+                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5">Имя</label>
+                    <input
+                      type="text"
+                      value={authForm.name}
+                      onChange={(e) => setAuthForm({ ...authForm, name: e.target.value })}
+                      placeholder="Александр"
+                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5">Email</label>
+                    <input
+                      type="email"
+                      value={authForm.email}
+                      onChange={(e) => setAuthForm({ ...authForm, email: e.target.value })}
+                      placeholder="your@email.ru"
+                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5">Пароль</label>
+                    <input
+                      type="password"
+                      value={authForm.password}
+                      onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })}
+                      placeholder="••••••••"
+                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-[#FF5A00] hover:bg-[#e05200] text-white py-4 rounded-2xl font-oswald font-bold text-lg uppercase tracking-wider transition-all btn-glow mt-2"
+                  >
+                    Создать аккаунт
+                  </button>
+                  <p className="text-center text-sm text-muted-foreground">
+                    Уже есть аккаунт?{" "}
+                    <button onClick={() => setAuthModal("login")} className="text-[#FF5A00] font-semibold hover:underline">
+                      Войти
+                    </button>
+                  </p>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -234,7 +260,7 @@ export default function Index() {
   );
 }
 
-function HomePage({ addToCart, added }: { addToCart: (p: (typeof PRODUCTS)[0]) => void; added: number | null }) {
+function HomePage() {
   const categories = ["Все", "Электроника", "Аксессуары", "Lifestyle", "Спорт"];
   const [activeCategory, setActiveCategory] = useState("Все");
 
@@ -348,7 +374,7 @@ function HomePage({ addToCart, added }: { addToCart: (p: (typeof PRODUCTS)[0]) =
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((product, i) => (
-            <ProductCard key={product.id} product={product} onAdd={addToCart} justAdded={added === product.id} delay={i * 100} />
+            <ProductCard key={product.id} product={product} delay={i * 100} />
           ))}
         </div>
       </section>
@@ -373,17 +399,7 @@ function HomePage({ addToCart, added }: { addToCart: (p: (typeof PRODUCTS)[0]) =
   );
 }
 
-function ProductCard({
-  product,
-  onAdd,
-  justAdded,
-  delay,
-}: {
-  product: (typeof PRODUCTS)[0];
-  onAdd: (p: (typeof PRODUCTS)[0]) => void;
-  justAdded: boolean;
-  delay: number;
-}) {
+function ProductCard({ product, delay }: { product: (typeof PRODUCTS)[0]; delay: number }) {
   return (
     <div
       className="bg-white rounded-3xl overflow-hidden card-hover animate-fade-in border border-border group"
@@ -425,25 +441,9 @@ function ProductCard({
               <span className="ml-2 text-sm text-muted-foreground line-through">{product.oldPrice.toLocaleString("ru")} ₽</span>
             )}
           </div>
-          <button
-            onClick={() => onAdd(product)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 ${
-              justAdded
-                ? "bg-green-500 text-white scale-95"
-                : "bg-[#FF5A00] hover:bg-[#e05200] text-white btn-glow"
-            }`}
-          >
-            {justAdded ? (
-              <>
-                <Icon name="Check" size={16} />
-                Добавлено
-              </>
-            ) : (
-              <>
-                <Icon name="Plus" size={16} />
-                В корзину
-              </>
-            )}
+          <button className="flex items-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm bg-[#FF5A00] hover:bg-[#e05200] text-white btn-glow transition-all duration-300">
+            <Icon name="ShoppingBag" size={16} />
+            Купить
           </button>
         </div>
       </div>
