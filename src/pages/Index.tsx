@@ -106,7 +106,7 @@ export default function Index() {
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-border shadow-sm">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           <button onClick={() => setPage("home")} className="flex items-center gap-2">
-            <span className="font-oswald text-2xl font-bold tracking-widest text-gradient">NOVA</span>
+            <span className="font-oswald text-2xl font-bold tracking-widest text-gradient">ShopPlay</span>
           </button>
 
           <nav className="hidden md:flex items-center gap-8">
