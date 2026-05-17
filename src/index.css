@@ -4,39 +4,39 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 220 20% 8%;
+    --background: 270 20% 6%;
+    --foreground: 270 10% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 8%;
+    --card: 270 18% 10%;
+    --card-foreground: 270 10% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 8%;
+    --popover: 270 18% 10%;
+    --popover-foreground: 270 10% 95%;
 
-    --primary: 22 100% 52%;
+    --primary: 270 80% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 245 80% 60%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 270 40% 18%;
+    --secondary-foreground: 270 10% 90%;
 
-    --muted: 220 14% 94%;
-    --muted-foreground: 220 14% 50%;
+    --muted: 270 20% 14%;
+    --muted-foreground: 270 10% 55%;
 
-    --accent: 22 100% 52%;
+    --accent: 270 80% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 14% 88%;
-    --input: 220 14% 88%;
-    --ring: 22 100% 52%;
+    --border: 270 20% 18%;
+    --input: 270 20% 18%;
+    --ring: 270 80% 60%;
 
     --radius: 0.75rem;
 
-    --neon-orange: #ff5a00;
-    --neon-indigo: #4f46e5;
-    --neon-pink: #f72585;
+    --neon-purple: #8b5cf6;
+    --neon-violet: #a855f7;
+    --neon-pink: #d946ef;
   }
 }
 
@@ -68,14 +68,14 @@
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #ff5a00 0%, #f72585 50%, #4f46e5 100%);
+    background: linear-gradient(135deg, #a855f7 0%, #d946ef 50%, #8b5cf6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
   }
 
   .card-hover {
@@ -85,11 +85,11 @@
   }
   .card-hover:hover {
     transform: translateY(-8px) scale(1.01);
-    box-shadow: 0 24px 48px rgba(255, 90, 0, 0.15);
+    box-shadow: 0 24px 48px rgba(139, 92, 246, 0.25);
   }
 
   .btn-glow:hover {
-    box-shadow: 0 0 24px rgba(255, 90, 0, 0.5);
+    box-shadow: 0 0 28px rgba(168, 85, 247, 0.6);
   }
 
   .nav-link {
@@ -102,7 +102,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: #ff5a00;
+    background: #a855f7;
     transition: width 0.3s ease;
   }
   .nav-link:hover::after {
@@ -143,10 +143,10 @@
 @keyframes pulse-badge {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(255, 90, 0, 0.4);
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(255, 90, 0, 0);
+    box-shadow: 0 0 0 8px rgba(139, 92, 246, 0);
   }
 }
 @keyframes marquee {

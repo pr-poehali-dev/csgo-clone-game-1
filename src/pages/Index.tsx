@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
+
 const PRODUCTS = [
   {
     id: 1,
@@ -81,9 +82,9 @@ export default function Index() {
   const [authForm, setAuthForm] = useState({ email: "", password: "", name: "" });
 
   return (
-    <div className="min-h-screen bg-[#F8F7F5] font-golos">
+    <div className="min-h-screen bg-[#0a0612] font-golos">
       {/* NAV */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-border shadow-sm">
+      <header className="sticky top-0 z-50 bg-[#0a0612]/90 backdrop-blur-md border-b border-[#2d1b4e] shadow-sm">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           <button onClick={() => setPage("home")} className="flex items-center gap-2">
             <span className="font-oswald text-2xl font-bold tracking-widest text-gradient">ShopPlay</span>
@@ -92,13 +93,13 @@ export default function Index() {
           <nav className="hidden md:flex items-center gap-8">
             <button
               onClick={() => setPage("home")}
-              className={`nav-link text-sm font-semibold uppercase tracking-wider transition-colors ${page === "home" ? "text-[#FF5A00]" : "text-foreground hover:text-[#FF5A00]"}`}
+              className={`nav-link text-sm font-semibold uppercase tracking-wider transition-colors ${page === "home" ? "text-[#a855f7]" : "text-foreground hover:text-[#a855f7]"}`}
             >
               Главная
             </button>
             <button
               onClick={() => setPage("contacts")}
-              className={`nav-link text-sm font-semibold uppercase tracking-wider transition-colors ${page === "contacts" ? "text-[#FF5A00]" : "text-foreground hover:text-[#FF5A00]"}`}
+              className={`nav-link text-sm font-semibold uppercase tracking-wider transition-colors ${page === "contacts" ? "text-[#a855f7]" : "text-foreground hover:text-[#a855f7]"}`}
             >
               Контакты
             </button>
@@ -114,13 +115,13 @@ export default function Index() {
             </button>
             <button
               onClick={() => setAuthModal("login")}
-              className="border border-border hover:border-[#FF5A00] hover:text-[#FF5A00] text-foreground px-4 py-2 rounded-full font-semibold text-sm transition-all"
+              className="border border-[#2d1b4e] hover:border-[#a855f7] hover:text-[#a855f7] text-foreground px-4 py-2 rounded-full font-semibold text-sm transition-all"
             >
               Вход
             </button>
             <button
               onClick={() => setAuthModal("register")}
-              className="bg-[#FF5A00] hover:bg-[#e05200] text-white px-4 py-2 rounded-full font-semibold text-sm transition-all btn-glow"
+              className="bg-[#a855f7] hover:bg-[#9333ea] text-white px-4 py-2 rounded-full font-semibold text-sm transition-all btn-glow"
             >
               Регистрация
             </button>
@@ -129,7 +130,7 @@ export default function Index() {
       </header>
 
       {/* MARQUEE */}
-      <div className="bg-[#FF5A00] overflow-hidden py-2.5">
+      <div className="bg-[#a855f7] overflow-hidden py-2.5">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
             <span key={i} className="text-white font-oswald text-sm font-semibold tracking-widest uppercase mx-8">
@@ -147,18 +148,18 @@ export default function Index() {
       {authModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setAuthModal(null)} />
-          <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-md animate-scale-in">
+          <div className="relative bg-[#130d24] rounded-3xl shadow-2xl w-full max-w-md animate-scale-in border border-[#2d1b4e]">
             {/* Tabs */}
             <div className="flex border-b">
               <button
                 onClick={() => { setAuthModal("login"); setAuthForm({ email: "", password: "", name: "" }); }}
-                className={`flex-1 py-4 font-oswald font-bold text-lg uppercase tracking-wider transition-colors rounded-tl-3xl ${authModal === "login" ? "text-[#FF5A00] border-b-2 border-[#FF5A00]" : "text-muted-foreground hover:text-foreground"}`}
+                className={`flex-1 py-4 font-oswald font-bold text-lg uppercase tracking-wider transition-colors rounded-tl-3xl ${authModal === "login" ? "text-[#a855f7] border-b-2 border-[#a855f7]" : "text-muted-foreground hover:text-foreground"}`}
               >
                 Вход
               </button>
               <button
                 onClick={() => { setAuthModal("register"); setAuthForm({ email: "", password: "", name: "" }); }}
-                className={`flex-1 py-4 font-oswald font-bold text-lg uppercase tracking-wider transition-colors rounded-tr-3xl ${authModal === "register" ? "text-[#FF5A00] border-b-2 border-[#FF5A00]" : "text-muted-foreground hover:text-foreground"}`}
+                className={`flex-1 py-4 font-oswald font-bold text-lg uppercase tracking-wider transition-colors rounded-tr-3xl ${authModal === "register" ? "text-[#a855f7] border-b-2 border-[#a855f7]" : "text-muted-foreground hover:text-foreground"}`}
               >
                 Регистрация
               </button>
@@ -180,7 +181,7 @@ export default function Index() {
                       value={authForm.email}
                       onChange={(e) => setAuthForm({ ...authForm, email: e.target.value })}
                       placeholder="your@email.ru"
-                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                      className="w-full px-4 py-3 bg-[#0a0612] border border-[#2d1b4e] rounded-xl text-sm text-foreground focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7]/20 transition-all"
                     />
                   </div>
                   <div>
@@ -190,18 +191,18 @@ export default function Index() {
                       value={authForm.password}
                       onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })}
                       placeholder="••••••••"
-                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                      className="w-full px-4 py-3 bg-[#0a0612] border border-[#2d1b4e] rounded-xl text-sm text-foreground focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7]/20 transition-all"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-[#FF5A00] hover:bg-[#e05200] text-white py-4 rounded-2xl font-oswald font-bold text-lg uppercase tracking-wider transition-all btn-glow mt-2"
+                    className="w-full bg-[#a855f7] hover:bg-[#9333ea] text-white py-4 rounded-2xl font-oswald font-bold text-lg uppercase tracking-wider transition-all btn-glow mt-2"
                   >
                     Войти
                   </button>
                   <p className="text-center text-sm text-muted-foreground">
                     Нет аккаунта?{" "}
-                    <button onClick={() => setAuthModal("register")} className="text-[#FF5A00] font-semibold hover:underline">
+                    <button onClick={() => setAuthModal("register")} className="text-[#a855f7] font-semibold hover:underline">
                       Зарегистрироваться
                     </button>
                   </p>
@@ -215,7 +216,7 @@ export default function Index() {
                       value={authForm.name}
                       onChange={(e) => setAuthForm({ ...authForm, name: e.target.value })}
                       placeholder="Александр"
-                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                      className="w-full px-4 py-3 bg-[#0a0612] border border-[#2d1b4e] rounded-xl text-sm text-foreground focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7]/20 transition-all"
                     />
                   </div>
                   <div>
@@ -225,7 +226,7 @@ export default function Index() {
                       value={authForm.email}
                       onChange={(e) => setAuthForm({ ...authForm, email: e.target.value })}
                       placeholder="your@email.ru"
-                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                      className="w-full px-4 py-3 bg-[#0a0612] border border-[#2d1b4e] rounded-xl text-sm text-foreground focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7]/20 transition-all"
                     />
                   </div>
                   <div>
@@ -235,18 +236,18 @@ export default function Index() {
                       value={authForm.password}
                       onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })}
                       placeholder="••••••••"
-                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                      className="w-full px-4 py-3 bg-[#0a0612] border border-[#2d1b4e] rounded-xl text-sm text-foreground focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7]/20 transition-all"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-[#FF5A00] hover:bg-[#e05200] text-white py-4 rounded-2xl font-oswald font-bold text-lg uppercase tracking-wider transition-all btn-glow mt-2"
+                    className="w-full bg-[#a855f7] hover:bg-[#9333ea] text-white py-4 rounded-2xl font-oswald font-bold text-lg uppercase tracking-wider transition-all btn-glow mt-2"
                   >
                     Создать аккаунт
                   </button>
                   <p className="text-center text-sm text-muted-foreground">
                     Уже есть аккаунт?{" "}
-                    <button onClick={() => setAuthModal("login")} className="text-[#FF5A00] font-semibold hover:underline">
+                    <button onClick={() => setAuthModal("login")} className="text-[#a855f7] font-semibold hover:underline">
                       Войти
                     </button>
                   </p>
@@ -269,24 +270,24 @@ function HomePage() {
   return (
     <main>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-[#0D0D0D] min-h-[85vh] flex items-center">
+      <section className="relative overflow-hidden bg-[#0a0612] min-h-[85vh] flex items-center">
         <div className="absolute inset-0 bg-noise opacity-30" />
         <div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-30"
           style={{
-            background: "radial-gradient(ellipse at 70% 50%, #FF5A00 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, #4F46E5 0%, transparent 50%)",
+            background: "radial-gradient(ellipse at 70% 50%, #a855f7 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, #7c3aed 0%, transparent 50%)",
           }}
         />
         <div
-          className="absolute right-0 top-0 bottom-0 w-1/2 opacity-30 bg-cover bg-center"
+          className="absolute right-0 top-0 bottom-0 w-1/2 opacity-20 bg-cover bg-center"
           style={{ backgroundImage: `url(https://cdn.poehali.dev/projects/f74bf30a-d3f6-422e-9f78-66619bd6e3a8/files/1551c3e4-dbe2-4206-a887-60a4a706ad22.jpg)` }}
         />
-        <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-r from-[#0D0D0D] to-transparent" />
+        <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-r from-[#0a0612] to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-4 md:px-8 py-20">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 mb-6 animate-fade-in">
-              <span className="w-2 h-2 bg-[#FF5A00] rounded-full animate-pulse" />
+              <span className="w-2 h-2 bg-[#a855f7] rounded-full animate-pulse" />
               <span className="text-white/80 text-sm font-medium">Новая коллекция 2026</span>
             </div>
             <h1 className="font-oswald text-6xl md:text-8xl font-black text-white leading-none mb-6 animate-fade-in delay-100">
@@ -301,7 +302,7 @@ function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in delay-300">
               <button
                 onClick={() => document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth" })}
-                className="bg-[#FF5A00] hover:bg-[#e05200] text-white px-8 py-4 rounded-2xl font-oswald font-bold text-lg uppercase tracking-wider transition-all btn-glow flex items-center gap-2 justify-center"
+                className="bg-[#a855f7] hover:bg-[#9333ea] text-white px-8 py-4 rounded-2xl font-oswald font-bold text-lg uppercase tracking-wider transition-all btn-glow flex items-center gap-2 justify-center"
               >
                 Смотреть каталог
                 <Icon name="ArrowRight" size={20} />
@@ -325,7 +326,7 @@ function HomePage() {
       </section>
 
       {/* FEATURES */}
-      <section className="bg-white py-12 border-b border-border">
+      <section className="bg-[#0f0920] py-12 border-b border-[#2d1b4e]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { icon: "Truck", title: "Бесплатная доставка", desc: "От 3 000 ₽" },
@@ -334,8 +335,8 @@ function HomePage() {
             { icon: "Headphones", title: "Поддержка 24/7", desc: "Всегда на связи" },
           ].map((f) => (
             <div key={f.title} className="flex items-start gap-3 p-4">
-              <div className="w-10 h-10 bg-[#FF5A00]/10 rounded-xl flex items-center justify-center shrink-0">
-                <Icon name={f.icon as never} size={20} className="text-[#FF5A00]" />
+              <div className="w-10 h-10 bg-[#a855f7]/10 rounded-xl flex items-center justify-center shrink-0">
+                <Icon name={f.icon as never} size={20} className="text-[#a855f7]" />
               </div>
               <div>
                 <div className="font-semibold text-sm">{f.title}</div>
@@ -351,7 +352,7 @@ function HomePage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
             <h2 className="font-oswald text-4xl md:text-5xl font-bold text-foreground">
-              КАТАЛОГ <span className="text-[#FF5A00]">ТОВАРОВ</span>
+              КАТАЛОГ <span className="text-[#a855f7]">ТОВАРОВ</span>
             </h2>
             <p className="text-muted-foreground mt-2">Выбирайте из тысяч позиций</p>
           </div>
@@ -362,8 +363,8 @@ function HomePage() {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
                   activeCategory === cat
-                    ? "bg-[#FF5A00] text-white shadow-lg shadow-orange-200"
-                    : "bg-white border border-border text-foreground hover:border-[#FF5A00] hover:text-[#FF5A00]"
+                    ? "bg-[#a855f7] text-white shadow-lg shadow-purple-900"
+                    : "bg-[#130d24] border border-[#2d1b4e] text-foreground hover:border-[#a855f7] hover:text-[#a855f7]"
                 }`}
               >
                 {cat}
@@ -387,7 +388,7 @@ function HomePage() {
           <h2 className="font-oswald text-4xl md:text-6xl font-black text-white mb-4">
             СКИДКА 20%
             <br />
-            <span className="text-[#FF5A00]">НА ВСЁ</span>
+            <span className="text-[#d946ef]">НА ВСЁ</span>
           </h2>
           <p className="text-white/70 mb-6">По промокоду <strong className="text-white">SHOP20</strong> до конца месяца</p>
           <button className="bg-white text-[#4F46E5] px-8 py-3 rounded-2xl font-oswald font-bold uppercase tracking-wider hover:bg-white/90 transition-all">
@@ -402,23 +403,23 @@ function HomePage() {
 function ProductCard({ product, delay }: { product: (typeof PRODUCTS)[0]; delay: number }) {
   return (
     <div
-      className="bg-white rounded-3xl overflow-hidden card-hover animate-fade-in border border-border group"
+      className="bg-[#130d24] rounded-3xl overflow-hidden card-hover animate-fade-in border border-[#2d1b4e] group"
       style={{ animationDelay: `${delay}ms`, opacity: 0, animationFillMode: "forwards" }}
     >
       <div className="relative overflow-hidden h-56">
         <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
         <div className="absolute top-3 left-3">
           <span className={`px-3 py-1 rounded-full text-xs font-bold text-white ${
-            product.badge === "Хит" ? "bg-[#FF5A00]" :
-            product.badge === "Новинка" ? "bg-[#4F46E5]" :
-            product.badge === "Топ" ? "bg-[#F72585]" :
-            product.badge === "Эксклюзив" ? "bg-[#0D0D0D]" :
-            "bg-[#FF5A00]"
+            product.badge === "Хит" ? "bg-[#a855f7]" :
+            product.badge === "Новинка" ? "bg-[#7c3aed]" :
+            product.badge === "Топ" ? "bg-[#d946ef]" :
+            product.badge === "Эксклюзив" ? "bg-[#1e0a3c]" :
+            "bg-[#a855f7]"
           }`}>
             {product.badge}
           </span>
         </div>
-        <button className="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-muted-foreground hover:text-[#F72585] transition-colors">
+        <button className="absolute top-3 right-3 w-9 h-9 bg-black/60 backdrop-blur rounded-full flex items-center justify-center text-muted-foreground hover:text-[#d946ef] transition-colors">
           <Icon name="Heart" size={16} />
         </button>
       </div>
@@ -429,19 +430,19 @@ function ProductCard({ product, delay }: { product: (typeof PRODUCTS)[0]; delay:
 
         <div className="flex items-center gap-1 mb-3">
           {[...Array(5)].map((_, i) => (
-            <Icon key={i} name="Star" size={12} className={i < Math.floor(product.rating) ? "text-[#FF5A00] fill-[#FF5A00]" : "text-border"} />
+            <Icon key={i} name="Star" size={12} className={i < Math.floor(product.rating) ? "text-[#a855f7] fill-[#a855f7]" : "text-[#2d1b4e]"} />
           ))}
           <span className="text-xs text-muted-foreground ml-1">{product.rating} ({product.reviews})</span>
         </div>
 
         <div className="flex items-center justify-between">
           <div>
-            <span className="font-oswald text-2xl font-bold text-[#FF5A00]">{product.price.toLocaleString("ru")} ₽</span>
+            <span className="font-oswald text-2xl font-bold text-[#a855f7]">{product.price.toLocaleString("ru")} ₽</span>
             {product.oldPrice && (
               <span className="ml-2 text-sm text-muted-foreground line-through">{product.oldPrice.toLocaleString("ru")} ₽</span>
             )}
           </div>
-          <button className="flex items-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm bg-[#FF5A00] hover:bg-[#e05200] text-white btn-glow transition-all duration-300">
+          <button className="flex items-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm bg-[#a855f7] hover:bg-[#9333ea] text-white btn-glow transition-all duration-300">
             <Icon name="ShoppingBag" size={16} />
             Купить
           </button>
@@ -463,7 +464,7 @@ function ContactsPage() {
   return (
     <main className="max-w-7xl mx-auto px-4 md:px-8 py-16">
       <div className="mb-12 animate-fade-in">
-        <p className="text-[#FF5A00] font-semibold uppercase tracking-widest text-sm mb-3">Мы всегда на связи</p>
+        <p className="text-[#a855f7] font-semibold uppercase tracking-widest text-sm mb-3">Мы всегда на связи</p>
         <h1 className="font-oswald text-5xl md:text-7xl font-black">
           КОНТАКТЫ <span className="text-gradient">& СВЯЗЬ</span>
         </h1>
@@ -473,12 +474,12 @@ function ContactsPage() {
         {/* INFO */}
         <div className="space-y-6 animate-fade-in delay-100">
           {[
-            { icon: "Send", title: "Telegram", value: "@QWERTY_Police", desc: "Писать: Пн–Вс 11:00–22:00", color: "bg-[#FF5A00]/10 text-[#FF5A00]" },
-            { icon: "Mail", title: "Gmail", value: "kvertiks66@gmail.com", desc: "Ответим в течение дня", color: "bg-[#4F46E5]/10 text-[#4F46E5]" },
-            { icon: "Package", title: "Доставка", value: "По всей России", desc: "Avito, СДЭК, Почта России", color: "bg-[#F72585]/10 text-[#F72585]" },
-            { icon: "MessageCircle", title: "Telegram", value: "@nova_shop", desc: "Быстрые ответы в чате", color: "bg-sky-100 text-sky-500" },
+            { icon: "Send", title: "Telegram", value: "@QWERTY_Police", desc: "Писать: Пн–Вс 11:00–22:00", color: "bg-[#a855f7]/10 text-[#a855f7]" },
+            { icon: "Mail", title: "Gmail", value: "kvertiks66@gmail.com", desc: "Ответим в течение дня", color: "bg-[#7c3aed]/10 text-[#a855f7]" },
+            { icon: "Package", title: "Доставка", value: "По всей России", desc: "Avito, СДЭК, Почта России", color: "bg-[#d946ef]/10 text-[#d946ef]" },
+            { icon: "MessageCircle", title: "Telegram", value: "@nova_shop", desc: "Быстрые ответы в чате", color: "bg-[#4c1d95]/30 text-[#c4b5fd]" },
           ].map((item) => (
-            <div key={item.title} className="flex items-start gap-4 p-5 bg-white rounded-2xl border border-border hover:border-[#FF5A00]/30 transition-all card-hover">
+            <div key={item.title} className="flex items-start gap-4 p-5 bg-[#130d24] rounded-2xl border border-[#2d1b4e] hover:border-[#a855f7]/40 transition-all card-hover">
               <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${item.color}`}>
                 <Icon name={item.icon as never} size={22} />
               </div>
@@ -490,7 +491,7 @@ function ContactsPage() {
             </div>
           ))}
 
-          <div className="p-5 bg-[#0D0D0D] rounded-2xl text-white">
+          <div className="p-5 bg-[#0f0920] border border-[#2d1b4e] rounded-2xl text-white">
             <h3 className="font-oswald text-xl font-bold mb-3">Мы в соцсетях</h3>
             <div className="flex gap-3">
               {[
@@ -500,7 +501,7 @@ function ContactsPage() {
               ].map((s) => (
                 <button
                   key={s.label}
-                  className="flex items-center gap-2 bg-white/10 hover:bg-[#FF5A00] px-4 py-2 rounded-xl text-sm font-medium transition-all"
+                  className="flex items-center gap-2 bg-white/10 hover:bg-[#a855f7] px-4 py-2 rounded-xl text-sm font-medium transition-all"
                 >
                   <Icon name={s.icon as never} size={16} />
                   {s.label}
@@ -511,7 +512,7 @@ function ContactsPage() {
         </div>
 
         {/* FORM */}
-        <div className="bg-white rounded-3xl p-8 border border-border shadow-sm animate-fade-in delay-200">
+        <div className="bg-[#130d24] rounded-3xl p-8 border border-[#2d1b4e] shadow-sm animate-fade-in delay-200">
           {sent ? (
             <div className="flex flex-col items-center justify-center h-full py-16 text-center gap-4 animate-scale-in">
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
@@ -519,7 +520,7 @@ function ContactsPage() {
               </div>
               <h3 className="font-oswald text-2xl font-bold">Сообщение отправлено!</h3>
               <p className="text-muted-foreground">Мы ответим вам в течение 2 часов</p>
-              <button onClick={() => setSent(false)} className="text-[#FF5A00] font-semibold hover:underline">
+              <button onClick={() => setSent(false)} className="text-[#a855f7] font-semibold hover:underline">
                 Отправить ещё
               </button>
             </div>
@@ -535,7 +536,7 @@ function ContactsPage() {
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="Александр"
-                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                      className="w-full px-4 py-3 bg-[#0a0612] border border-[#2d1b4e] rounded-xl text-sm text-foreground focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7]/20 transition-all"
                     />
                   </div>
                   <div>
@@ -545,7 +546,7 @@ function ContactsPage() {
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       placeholder="+7 (000) 000-00-00"
-                      className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                      className="w-full px-4 py-3 bg-[#0a0612] border border-[#2d1b4e] rounded-xl text-sm text-foreground focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7]/20 transition-all"
                     />
                   </div>
                 </div>
@@ -556,7 +557,7 @@ function ContactsPage() {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="your@email.ru"
-                    className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all"
+                    className="w-full px-4 py-3 bg-[#0a0612] border border-[#2d1b4e] rounded-xl text-sm text-foreground focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7]/20 transition-all"
                   />
                 </div>
                 <div>
@@ -566,12 +567,12 @@ function ContactsPage() {
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     placeholder="Расскажите, чем мы можем помочь..."
-                    className="w-full px-4 py-3 bg-[#F8F7F5] border border-border rounded-xl text-sm focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00]/20 transition-all resize-none"
+                    className="w-full px-4 py-3 bg-[#0a0612] border border-[#2d1b4e] rounded-xl text-sm text-foreground focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7]/20 transition-all resize-none"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-[#FF5A00] hover:bg-[#e05200] text-white py-4 rounded-2xl font-oswald font-bold text-lg uppercase tracking-wider transition-all btn-glow flex items-center justify-center gap-2"
+                  className="w-full bg-[#a855f7] hover:bg-[#9333ea] text-white py-4 rounded-2xl font-oswald font-bold text-lg uppercase tracking-wider transition-all btn-glow flex items-center justify-center gap-2"
                 >
                   <Icon name="Send" size={20} />
                   Отправить сообщение
@@ -585,7 +586,7 @@ function ContactsPage() {
       {/* FAQ */}
       <section className="mt-20 mb-8">
         <h2 className="font-oswald text-3xl font-bold mb-8">
-          ЧАСТЫЕ <span className="text-[#FF5A00]">ВОПРОСЫ</span>
+          ЧАСТЫЕ <span className="text-[#a855f7]">ВОПРОСЫ</span>
         </h2>
         <div className="grid md:grid-cols-2 gap-4">
           {[
@@ -594,9 +595,9 @@ function ContactsPage() {
             { q: "Какие способы оплаты?", a: "Принимаем карты Visa, MasterCard, МИР, наличные при получении, СБП, ЮMoney и другие." },
             { q: "Есть ли гарантия?", a: "Все товары имеют гарантию производителя. На электронику — минимум 12 месяцев." },
           ].map((item) => (
-            <div key={item.q} className="bg-white border border-border rounded-2xl p-6 hover:border-[#FF5A00]/30 transition-all">
+            <div key={item.q} className="bg-[#130d24] border border-[#2d1b4e] rounded-2xl p-6 hover:border-[#a855f7]/40 transition-all">
               <h3 className="font-semibold mb-2 flex items-start gap-2">
-                <span className="text-[#FF5A00] font-oswald font-bold">Q.</span>
+                <span className="text-[#a855f7] font-oswald font-bold">Q.</span>
                 {item.q}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed">{item.a}</p>
