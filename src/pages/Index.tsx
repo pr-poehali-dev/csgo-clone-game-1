@@ -129,8 +129,8 @@ export default function Index() {
               onClick={() => setPage("contacts")}
               className="hidden md:flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Icon name="Phone" size={16} />
-              <span>+7 (000) 000-00-00</span>
+              <Icon name="Send" size={16} />
+              <span>Telegram: @Qwerty_Police</span>
             </button>
             <button
               onClick={() => setCartOpen(true)}
