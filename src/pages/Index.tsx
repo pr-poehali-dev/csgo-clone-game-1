@@ -474,7 +474,7 @@ function ContactsPage() {
         <div className="space-y-6 animate-fade-in delay-100">
           {[
             { icon: "Send", title: "Telegram", value: "@QWERTY_Police", desc: "Писать: Пн–Вс 11:00–22:00", color: "bg-[#FF5A00]/10 text-[#FF5A00]" },
-            { icon: "Mail", title: "Email", value: "hello@nova-shop.ru", desc: "Ответим в течение 2 часов", color: "bg-[#4F46E5]/10 text-[#4F46E5]" },
+            { icon: "Mail", title: "Gmail", value: "kvertiks66@gmail.com", desc: "Ответим в течение дня", color: "bg-[#4F46E5]/10 text-[#4F46E5]" },
             { icon: "Package", title: "Доставка", value: "По всей России", desc: "Avito, СДЭК, Почта России", color: "bg-[#F72585]/10 text-[#F72585]" },
             { icon: "MessageCircle", title: "Telegram", value: "@nova_shop", desc: "Быстрые ответы в чате", color: "bg-sky-100 text-sky-500" },
           ].map((item) => (
