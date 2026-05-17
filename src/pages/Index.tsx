@@ -475,7 +475,7 @@ function ContactsPage() {
           {[
             { icon: "Send", title: "Telegram", value: "@QWERTY_Police", desc: "Писать: Пн–Вс 11:00–22:00", color: "bg-[#FF5A00]/10 text-[#FF5A00]" },
             { icon: "Mail", title: "Email", value: "hello@nova-shop.ru", desc: "Ответим в течение 2 часов", color: "bg-[#4F46E5]/10 text-[#4F46E5]" },
-            { icon: "MapPin", title: "Офис", value: "Москва, ул. Примерная, 1", desc: "Пн–Пт 10:00–18:00", color: "bg-[#F72585]/10 text-[#F72585]" },
+            { icon: "Package", title: "Доставка", value: "По всей России", desc: "Avito, СДЭК, Почта России", color: "bg-[#F72585]/10 text-[#F72585]" },
             { icon: "MessageCircle", title: "Telegram", value: "@nova_shop", desc: "Быстрые ответы в чате", color: "bg-sky-100 text-sky-500" },
           ].map((item) => (
             <div key={item.title} className="flex items-start gap-4 p-5 bg-white rounded-2xl border border-border hover:border-[#FF5A00]/30 transition-all card-hover">
